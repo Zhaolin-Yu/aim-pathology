@@ -1,0 +1,209 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/forms";
+@plugin '@tailwindcss/typography';
+@source '../node_modules/pliny';
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 语义化配色：由 :root / .dark 提供，供 utilities 使用 */
+@theme {
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* 语义色：绑定到 base 层变量，随 light/dark 切换 */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+
+  /* primary 色阶：亮色用紫、暗色用浅紫，与 --primary 一致 */
+  --color-primary-50: oklch(0.977 0.014 292.5);
+  --color-primary-100: oklch(0.945 0.033 292.7);
+  --color-primary-200: oklch(0.893 0.076 292.7);
+  --color-primary-300: oklch(0.816 0.141 292.6);
+  --color-primary-400: oklch(0.704 0.2 292.5);
+  --color-primary-500: var(--primary);
+  --color-primary-600: oklch(0.514 0.222 292.7);
+  --color-primary-700: oklch(0.447 0.194 292.9);
+  --color-primary-800: oklch(0.383 0.157 293.2);
+  --color-primary-900: oklch(0.33 0.119 293.4);
+  --color-primary-950: oklch(0.266 0.066 292.7);
+
+  --color-gray-50: oklch(0.985 0.001 247.9);
+  --color-gray-100: oklch(0.967 0.002 264.5);
+  --color-gray-200: oklch(0.928 0.005 264.5);
+  --color-gray-300: oklch(0.872 0.008 258.3);
+  --color-gray-400: oklch(0.704 0.015 264.4);
+  --color-gray-500: oklch(0.551 0.021 264.4);
+  --color-gray-600: oklch(0.446 0.024 256.8);
+  --color-gray-700: oklch(0.373 0.028 259.7);
+  --color-gray-800: oklch(0.278 0.026 256.8);
+  --color-gray-900: oklch(0.21 0.028 264.7);
+  --color-gray-950: oklch(0.129 0.042 264.1);
+
+  --line-height-11: 2.75rem;
+  --line-height-12: 3rem;
+  --line-height-13: 3.25rem;
+  --line-height-14: 3.5rem;
+  --z-60: 60;
+  --z-70: 70;
+  --z-80: 80;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  :root {
+    /* Light Mode */
+    --background: #fafafa;
+    --foreground: #3f3f46;
+    --primary: #8b5cf6; /* 柔和的紫 */
+    --secondary: #34d399; /* 柔和的绿 */
+    --muted: #a1a1aa;
+  }
+
+  .dark {
+    /* Dark Mode */
+    --background: #18181b;
+    --foreground: #d4d4d8;
+    --primary: #c4b5fd; /* 暗模式下更浅、更灰的紫 */
+    --secondary: #6ee7b7; /* 暗模式下的弱化绿 */
+    --muted: #71717a;
+  }
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  a,
+  button {
+    outline-color: var(--primary);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid;
+    border-radius: var(--radius-sm);
+    outline-color: var(--primary);
+  }
+}
+
+@layer utilities {
+  .prose {
+    & a {
+      color: var(--primary);
+      &:hover {
+        opacity: 0.9;
+      }
+      & code {
+        color: var(--primary);
+      }
+    }
+    & :where(h1, h2) {
+      font-weight: 700;
+      letter-spacing: var(--tracking-tight);
+    }
+    & h3 {
+      font-weight: 600;
+    }
+    & :where(code):not(pre code) {
+      color: var(--primary);
+    }
+  }
+
+  .prose-invert {
+    & a {
+      color: var(--primary);
+      &:hover {
+        opacity: 0.9;
+      }
+      & code {
+        color: var(--primary);
+      }
+    }
+    & :where(h1, h2, h3, h4, h5, h6) {
+      color: var(--foreground);
+    }
+  }
+}
+
+.task-list-item::before {
+  @apply hidden;
+}
+
+.task-list-item {
+  @apply list-none;
+}
+
+.footnotes {
+  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+
+.data-footnote-backref {
+  @apply no-underline;
+}
+
+.csl-entry {
+  @apply my-5;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+.katex-display {
+  overflow: auto hidden;
+}
+
+.content-header-link {
+  opacity: 0;
+  margin-left: -24px;
+  padding-right: 4px;
+}
+
+.content-header:hover .content-header-link,
+.content-header-link:hover {
+  opacity: 1;
+}
+
+.linkicon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 区块 / 研究方向切换渐入 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
