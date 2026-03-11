@@ -37,7 +37,7 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
       - run: yarn build
         env:
           INIT_CWD: ${{ github.workspace }}
