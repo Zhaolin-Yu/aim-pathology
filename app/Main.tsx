@@ -22,7 +22,7 @@ const RESEARCH_ITEMS = [
     emoji: '🦷',
     title: 'Dental AI',
     desc: 'Building specialized vision-language models and autonomous agents for panoramic X-ray and CBCT analysis. Empowering next-generation dental diagnosis and treatment planning.',
-    image: 'https://placehold.co/800x400/18181b/6ee7b7?text=Dental+AI',
+    image: '/static/images/dental-ai.png',
   },
   {
     id: 'ccta',
@@ -162,56 +162,58 @@ export default function Home({
         <div className="divider-gradient" />
       </FadeInSection>
 
-      {/* Blog */}
-      <FadeInSection className="w-full">
-        <section className="py-16 md:py-24">
-          <div className="mb-8 flex items-baseline justify-between">
-            <h2 className="text-foreground text-2xl font-bold tracking-tight md:text-3xl">Blog</h2>
-            <Link
-              href="/blog"
-              className="text-primary text-sm font-medium hover:underline"
-              aria-label="All posts"
-            >
-              All Posts →
-            </Link>
-          </div>
+      {/* Blog：没有文章时不显示 */}
+      {posts.length > 0 && (
+        <FadeInSection className="w-full">
+          <section className="py-16 md:py-24">
+            <div className="mb-8 flex items-baseline justify-between">
+              <h2 className="text-foreground text-2xl font-bold tracking-tight md:text-3xl">
+                Blog
+              </h2>
+              <Link
+                href="/blog"
+                className="text-primary text-sm font-medium hover:underline"
+                aria-label="All posts"
+              >
+                All Posts →
+              </Link>
+            </div>
 
-          {!posts.length && <p className="text-muted">No posts yet.</p>}
-
-          <ul className="divide-y divide-gray-200/60 dark:divide-gray-700/60">
-            {posts.slice(0, MAX_BLOG_DISPLAY).map((post) => (
-              <li key={post.slug} className="py-5 first:pt-0">
-                <article className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6">
-                  <time
-                    dateTime={post.date}
-                    className="text-muted shrink-0 font-mono text-xs tabular-nums sm:w-36"
-                  >
-                    {formatDate(post.date, siteMetadata.locale)}
-                  </time>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-foreground text-base leading-snug font-semibold">
-                      <Link href={`/blog/${post.slug}`} className="text-primary hover:underline">
-                        {post.title}
-                      </Link>
-                    </h3>
-                    {post.summary && (
-                      <p className="text-muted mt-1 text-sm leading-relaxed">{post.summary}</p>
-                    )}
-                    {post.tags.length > 0 && (
-                      <div className="mt-1.5 flex flex-wrap gap-1">
-                        {post.tags.map((tag) => (
-                          <Tag key={tag} text={tag} />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ul>
-        </section>
-        <div className="divider-gradient" />
-      </FadeInSection>
+            <ul className="divide-y divide-gray-200/60 dark:divide-gray-700/60">
+              {posts.slice(0, MAX_BLOG_DISPLAY).map((post) => (
+                <li key={post.slug} className="py-5 first:pt-0">
+                  <article className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6">
+                    <time
+                      dateTime={post.date}
+                      className="text-muted shrink-0 font-mono text-xs tabular-nums sm:w-36"
+                    >
+                      {formatDate(post.date, siteMetadata.locale)}
+                    </time>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-foreground text-base leading-snug font-semibold">
+                        <Link href={`/blog/${post.slug}`} className="text-primary hover:underline">
+                          {post.title}
+                        </Link>
+                      </h3>
+                      {post.summary && (
+                        <p className="text-muted mt-1 text-sm leading-relaxed">{post.summary}</p>
+                      )}
+                      {post.tags.length > 0 && (
+                        <div className="mt-1.5 flex flex-wrap gap-1">
+                          {post.tags.map((tag) => (
+                            <Tag key={tag} text={tag} />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <div className="divider-gradient" />
+        </FadeInSection>
+      )}
 
       {/* About */}
       <FadeInSection className="w-full">

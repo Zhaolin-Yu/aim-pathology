@@ -38,7 +38,7 @@ export default async function PublicationPage(props: { params: Promise<{ slug: s
   return (
     <SectionContainer>
       <article>
-        <header className="border-b border-gray-200 pb-6 dark:border-gray-700">
+        <header className="pb-6">
           <p className="text-muted text-xs font-medium tracking-wider uppercase">
             {formatDate(pub.date, siteMetadata.locale)}
           </p>
@@ -78,10 +78,12 @@ export default async function PublicationPage(props: { params: Promise<{ slug: s
             )}
           </div>
         </header>
+        <div className="divider-gradient" />
         <div className="prose prose-invert mt-8 max-w-none">
           {body?.code && <MDXLayoutRenderer code={body.code} components={components} />}
         </div>
-        <footer className="mt-10 border-t border-gray-200 pt-6 dark:border-gray-700">
+        <div className="divider-gradient mt-10" />
+        <footer className="pt-6 pb-4">
           <Link href="/publications" className="text-primary text-sm font-medium hover:underline">
             ← Back to Publications
           </Link>

@@ -1,10 +1,10 @@
-/** 侧边栏分组，与 SVL People 页类似 */
 export const TEAM_CATEGORIES = [
   { id: 'group-leader', label: 'Group Leader' },
   { id: 'team-leader', label: 'Team Leader' },
   { id: 'research-fellow', label: 'Research Fellow' },
   { id: 'phd', label: 'PhD' },
   { id: 'master', label: 'Master' },
+  { id: 'bachelor', label: 'Bachelor' },
 ] as const
 
 export type TeamCategoryId = (typeof TEAM_CATEGORIES)[number]['id']
@@ -21,20 +21,39 @@ export type TeamMember = {
 export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: 'Zongyuan Ge',
-    role: 'Principal Investigator (PI)',
-    link: '#',
+    role: 'Founding Director of the AIM for Health Lab',
+    link: 'https://research.monash.edu/en/persons/zongyuan-ge/',
     category: 'group-leader',
   },
   {
-    name: 'Your Name',
-    role: 'Ph.D. Researcher',
-    link: '#',
+    name: 'Litao Yang',
+    role: 'Research Fellow',
+    link: 'https://research.monash.edu/en/persons/litao-yang/',
+    category: 'team-leader',
+  },
+  {
+    name: 'Zhenhua Chen',
+    role: 'zhenhua.chen@monash.edu',
     category: 'phd',
   },
   {
-    name: 'Colleague A',
-    role: 'Postdoc Researcher',
-    link: '#',
-    category: 'research-fellow',
+    name: 'Yunshu Chen',
+    role: 'yunshu.chen@monash.edu',
+    category: 'phd',
+  },
+  {
+    name: 'Chang Yuwen',
+    role: 'chang.yuwen@monash.edu',
+    category: 'phd',
+  },
+  {
+    name: 'Zhaolin Yu',
+    role: 'zyuu0081@student.monash.edu',
+    category: 'master',
+  },
+  {
+    name: 'Jason Liu',
+    role: 'jason.liu1@monash.edu',
+    category: 'bachelor',
   },
 ]

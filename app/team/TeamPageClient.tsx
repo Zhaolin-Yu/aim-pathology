@@ -19,19 +19,20 @@ const RANK_STYLE: Record<
 > = {
   'group-leader': { size: 100, initial: 'text-4xl', name: 'text-base font-bold', role: 'text-sm' },
   'team-leader': {
-    size: 96,
+    size: 98,
     initial: 'text-3xl',
     name: 'text-base font-semibold',
     role: 'text-sm',
   },
   'research-fellow': {
-    size: 88,
+    size: 96,
     initial: 'text-2xl',
     name: 'text-sm font-semibold',
     role: 'text-xs',
   },
-  phd: { size: 80, initial: 'text-2xl', name: 'text-sm font-semibold', role: 'text-xs' },
-  master: { size: 80, initial: 'text-2xl', name: 'text-sm font-semibold', role: 'text-xs' },
+  phd: { size: 94, initial: 'text-2xl', name: 'text-sm font-semibold', role: 'text-xs' },
+  master: { size: 92, initial: 'text-2xl', name: 'text-sm font-semibold', role: 'text-xs' },
+  bachelor: { size: 92, initial: 'text-2xl', name: 'text-sm font-semibold', role: 'text-xs' },
 }
 
 export default function TeamPageClient({
