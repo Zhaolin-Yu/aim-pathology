@@ -1,12 +1,13 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/forms";
+@plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @source '../node_modules/pliny';
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* 语义化配色：由 :root / .dark 提供，供 utilities 使用 */
 @theme {
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+  --font-sans:
+    var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
   /* 语义色：绑定到 base 层变量，随 light/dark 切换 */
@@ -206,4 +207,72 @@ input:-webkit-autofill:focus {
 
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Hero 标题背后的微光晕 */
+.hero-glow {
+  position: relative;
+}
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  inset: -20% -10%;
+  background: radial-gradient(ellipse at center, var(--primary) 0%, transparent 70%);
+  opacity: 0.06;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(40px);
+}
+:where(.dark) .hero-glow::before {
+  opacity: 0.1;
+}
+
+/* Research 图片 hover 微缩放 */
+.research-img-wrap img {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.research-img-wrap:hover img {
+  transform: scale(1.04);
+}
+
+/* 渐变分隔线 */
+.divider-gradient {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--muted) 20%,
+    var(--muted) 80%,
+    transparent
+  );
+  opacity: 0.3;
+}
+
+.divider-gradient-top {
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(
+      to right,
+      transparent,
+      var(--muted) 20%,
+      var(--muted) 80%,
+      transparent
+    )
+    1;
+  border-image-slice: 1;
+  opacity: 1;
+}
+.divider-gradient-top::before {
+  content: none;
+}
+
+/* 论文条目 hover 左侧 accent 线动画 */
+.pub-row {
+  border-left: 2px solid transparent;
+  transition:
+    border-color 0.25s ease,
+    padding-left 0.25s ease;
+}
+.pub-row:hover {
+  border-left-color: var(--primary);
+  padding-left: 1.25rem;
 }

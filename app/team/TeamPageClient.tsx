@@ -101,13 +101,6 @@ export default function TeamPageClient({
             </section>
           )
         })}
-
-        <div className="border-secondary/40 bg-secondary/5 rounded-xl border border-dashed p-6 text-center">
-          <p className="text-secondary font-semibold">We are hiring!</p>
-          <p className="text-muted mt-2 text-sm">
-            Looking for motivated Ph.D. students and postdocs.
-          </p>
-        </div>
       </main>
     </div>
   )

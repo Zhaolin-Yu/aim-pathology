@@ -82,7 +82,7 @@ export default async function PublicationPage(props: { params: Promise<{ slug: s
           {body?.code && <MDXLayoutRenderer code={body.code} components={components} />}
         </div>
         <footer className="mt-10 border-t border-gray-200 pt-6 dark:border-gray-700">
-          <Link href="/#publications" className="text-primary text-sm font-medium hover:underline">
+          <Link href="/publications" className="text-primary text-sm font-medium hover:underline">
             ← Back to Publications
           </Link>
         </footer>
