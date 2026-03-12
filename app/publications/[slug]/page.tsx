@@ -39,12 +39,14 @@ export default async function PublicationPage(props: { params: Promise<{ slug: s
     <SectionContainer>
       <article>
         <header className="pb-6">
-          <p className="text-muted text-xs font-medium tracking-wider uppercase">
+          <p className="text-foreground/60 text-xs font-semibold tracking-wider uppercase">
             {formatDate(pub.date, siteMetadata.locale)}
           </p>
           <h1 className="text-foreground mt-1 text-2xl font-bold md:text-3xl">{pub.title}</h1>
-          <p className="text-muted mt-2 text-sm">Venue: {pub.venue}</p>
-          <p className="text-muted mt-1 text-sm">Authors: {pub.authors?.join(', ') || '—'}</p>
+          <p className="text-foreground/60 mt-2 text-sm font-medium">Venue: {pub.venue}</p>
+          <p className="text-foreground/60 mt-1 text-sm font-medium">
+            Authors: {pub.authors?.join(', ') || '—'}
+          </p>
           <div className="mt-3 flex flex-wrap gap-2">
             {pub.pdf && (
               <a
@@ -79,14 +81,20 @@ export default async function PublicationPage(props: { params: Promise<{ slug: s
           </div>
         </header>
         <div className="divider-gradient" />
-        <div className="prose prose-invert mt-8 max-w-none">
+        <div className="prose dark:prose-invert mt-8 max-w-none">
           {body?.code && <MDXLayoutRenderer code={body.code} components={components} />}
         </div>
         <div className="divider-gradient mt-10" />
         <footer className="pt-6 pb-4">
-          <Link href="/publications" className="text-primary text-sm font-medium hover:underline">
-            ← Back to Publications
-          </Link>
+          {allPublications.filter((p) => !p.draft).length >= 3 ? (
+            <Link href="/publications" className="text-primary text-sm font-medium hover:underline">
+              ← Back to Projects
+            </Link>
+          ) : (
+            <Link href="/" className="text-primary text-sm font-medium hover:underline">
+              ← Back to Home
+            </Link>
+          )}
         </footer>
       </article>
     </SectionContainer>

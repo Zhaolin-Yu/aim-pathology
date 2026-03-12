@@ -18,6 +18,7 @@ export default async function Page() {
       url: p.url,
       pdf: p.pdf,
       code: p.code,
+      image: p.image,
     }))
   return <Main posts={posts} publications={publications} />
 }

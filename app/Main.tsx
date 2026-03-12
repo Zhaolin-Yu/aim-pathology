@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import BaffleSubtitle from '@/components/BaffleSubtitle'
@@ -5,8 +6,17 @@ import ResearchSection from '@/components/ResearchSection'
 import FadeInSection from '@/components/FadeInSection'
 import PublicationTag from '@/components/PublicationTag'
 import siteMetadata from '@/data/siteMetadata'
+import { TEAM_MEMBERS } from '@/data/teamData'
 import { formatDate } from 'pliny/utils/formatDate'
 import dentalAiImg from '../public/static/images/dental-ai.png'
+
+/** 本地图片路径 → import 后的资源路径，解决部署时 basePath 前缀问题 */
+const LOCAL_IMAGE_MAP: Record<string, string> = {
+  '/static/images/dental-ai.png': dentalAiImg.src,
+}
+function resolveImage(src: string): string {
+  return LOCAL_IMAGE_MAP[src] || src
+}
 
 const MAX_BLOG_DISPLAY = 5
 
@@ -23,7 +33,7 @@ const RESEARCH_ITEMS = [
     emoji: '🦷',
     title: 'Dental AI',
     desc: 'Building specialized vision-language models and autonomous agents for panoramic X-ray and CBCT analysis. Empowering next-generation dental diagnosis and treatment planning.',
-    image: dentalAiImg.src,
+    image: 'https://placehold.co/800x400/18181b/6ee7b7?text=Dental+AI',
   },
   {
     id: 'ccta',
@@ -56,6 +66,7 @@ export default function Home({
     url?: string
     pdf?: string
     code?: string
+    image?: string
   }[]
 }) {
   return (
@@ -97,65 +108,84 @@ export default function Home({
       {/* Research */}
       <FadeInSection className="w-full">
         <section id="research" className="scroll-mt-20 py-16 md:py-24">
-          <ResearchSection items={RESEARCH_ITEMS} />
+          <ResearchSection
+            items={RESEARCH_ITEMS.map((i) => ({ ...i, image: resolveImage(i.image) }))}
+          />
         </section>
         <div className="divider-gradient" />
       </FadeInSection>
 
-      {/* Publications */}
+      {/* Projects */}
       <FadeInSection className="w-full">
-        <section id="publications" className="scroll-mt-20 py-16 md:py-24">
+        <section id="projects" className="scroll-mt-20 py-16 md:py-24">
           <div className="text-foreground mb-8 flex items-baseline justify-between">
-            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Publications</h2>
-            <Link
-              href="/publications"
-              className="text-primary text-sm font-medium hover:underline"
-              aria-label="All publications"
-            >
-              All Publications →
-            </Link>
+            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Projects</h2>
+            {publications.length >= 3 && (
+              <Link
+                href="/publications"
+                className="text-primary text-sm font-medium hover:underline"
+                aria-label="All projects"
+              >
+                All Projects →
+              </Link>
+            )}
           </div>
 
           {publications.length === 0 && (
-            <p className="text-muted">
-              No publications yet. Add MDX files under data/publication/.
-            </p>
+            <p className="text-muted">No projects yet. Add MDX files under data/publication/.</p>
           )}
 
           <div className="space-y-0">
             {publications.map((pub) => (
-              <article key={pub.slug} className="pub-row py-5 pl-4">
-                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
-                  <time
-                    dateTime={pub.date}
-                    className="text-muted shrink-0 font-mono text-xs tabular-nums"
-                  >
-                    {formatDate(pub.date, siteMetadata.locale)}
-                  </time>
-                  <span className="text-muted hidden font-mono text-xs sm:inline">·</span>
-                  <span className="text-muted font-mono text-xs tracking-wider uppercase">
-                    {pub.venue}
-                  </span>
+              <article key={pub.slug} className="pub-row flex items-center gap-6 py-5 pl-4">
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                    <time
+                      dateTime={pub.date}
+                      className="text-muted shrink-0 font-mono text-xs tabular-nums"
+                    >
+                      {formatDate(pub.date, siteMetadata.locale)}
+                    </time>
+                    <span className="text-muted hidden font-mono text-xs sm:inline">·</span>
+                    <span className="text-muted font-mono text-xs tracking-wider uppercase">
+                      {pub.venue}
+                    </span>
+                  </div>
+                  <h3 className="text-foreground mt-1.5 text-base leading-snug font-semibold">
+                    <Link
+                      href={`/publications/${pub.slug}`}
+                      className="text-primary hover:underline"
+                    >
+                      {pub.title}
+                    </Link>
+                  </h3>
+                  <p className="text-muted mt-1 text-sm">{pub.authors?.join(', ') || '—'}</p>
+                  {pub.tags && pub.tags.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {pub.tags.map((tag) => {
+                        const href =
+                          tag === 'PDF' && pub.pdf
+                            ? pub.pdf
+                            : tag === 'Code' && pub.code
+                              ? pub.code
+                              : tag === 'Link' && pub.url
+                                ? pub.url
+                                : undefined
+                        return <PublicationTag key={tag} text={tag} href={href} />
+                      })}
+                    </div>
+                  )}
                 </div>
-                <h3 className="text-foreground mt-1.5 text-base leading-snug font-semibold">
-                  <Link href={`/publications/${pub.slug}`} className="text-primary hover:underline">
-                    {pub.title}
-                  </Link>
-                </h3>
-                <p className="text-muted mt-1 text-sm">{pub.authors?.join(', ') || '—'}</p>
-                {pub.tags && pub.tags.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {pub.tags.map((tag) => {
-                      const href =
-                        tag === 'PDF' && pub.pdf
-                          ? pub.pdf
-                          : tag === 'Code' && pub.code
-                            ? pub.code
-                            : tag === 'Link' && pub.url
-                              ? pub.url
-                              : undefined
-                      return <PublicationTag key={tag} text={tag} href={href} />
-                    })}
+                {pub.image && (
+                  <div className="relative hidden aspect-video w-40 shrink-0 overflow-hidden rounded-sm border border-gray-200 sm:block dark:border-gray-700">
+                    <Image
+                      src={resolveImage(pub.image)}
+                      alt={pub.title}
+                      fill
+                      className="object-cover"
+                      sizes="160px"
+                      unoptimized
+                    />
                   </div>
                 )}
               </article>
@@ -173,13 +203,15 @@ export default function Home({
               <h2 className="text-foreground text-2xl font-bold tracking-tight md:text-3xl">
                 Blog
               </h2>
-              <Link
-                href="/blog"
-                className="text-primary text-sm font-medium hover:underline"
-                aria-label="All posts"
-              >
-                All Posts →
-              </Link>
+              {posts.length >= 3 && (
+                <Link
+                  href="/blog"
+                  className="text-primary text-sm font-medium hover:underline"
+                  aria-label="All posts"
+                >
+                  All Posts →
+                </Link>
+              )}
             </div>
 
             <ul className="divide-y divide-gray-200/60 dark:divide-gray-700/60">
@@ -218,6 +250,71 @@ export default function Home({
         </FadeInSection>
       )}
 
+      {/* Team */}
+      <FadeInSection className="w-full">
+        <section id="team" className="scroll-mt-20 py-16 md:py-24">
+          <h2 className="text-foreground mb-8 text-2xl font-bold tracking-tight md:text-3xl">
+            Team
+          </h2>
+          {(() => {
+            const leaders = TEAM_MEMBERS.filter((m) =>
+              (['group-leader', 'team-leader'] as string[]).includes(m.category)
+            )
+            const others = TEAM_MEMBERS.filter(
+              (m) => !(['group-leader', 'team-leader'] as string[]).includes(m.category)
+            )
+            const renderCard = (member: (typeof TEAM_MEMBERS)[number]) => (
+              <div key={member.name} className="flex w-64 items-center gap-3">
+                <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-sm bg-gray-200 dark:bg-gray-700">
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      sizes="100px"
+                    />
+                  ) : (
+                    <div className="bg-primary/15 text-primary flex h-full w-full items-center justify-center text-3xl font-bold">
+                      {member.name.charAt(0)}
+                    </div>
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-foreground text-sm leading-snug font-semibold">
+                    {member.link ? (
+                      <a
+                        href={member.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline"
+                      >
+                        {member.name}
+                      </a>
+                    ) : (
+                      member.name
+                    )}
+                  </h3>
+                  <p className="text-muted mt-0.5 text-xs">{member.role}</p>
+                </div>
+              </div>
+            )
+            return (
+              <div className="space-y-8">
+                <div className="flex flex-wrap gap-x-10 gap-y-6">{leaders.map(renderCard)}</div>
+                {others.length > 0 && (
+                  <>
+                    <div className="divider-gradient" />
+                    <div className="flex flex-wrap gap-x-10 gap-y-6">{others.map(renderCard)}</div>
+                  </>
+                )}
+              </div>
+            )
+          })()}
+        </section>
+        <div className="divider-gradient" />
+      </FadeInSection>
+
       {/* About */}
       <FadeInSection className="w-full">
         <section id="about" className="scroll-mt-20 py-16 md:py-24">
@@ -238,10 +335,7 @@ export default function Home({
               and beyond.
             </p>
             <p>
-              We are always looking for passionate Ph.D. students, postdocs, and visiting scholars.{' '}
-              <Link href="/team" className="text-primary font-medium hover:underline">
-                Meet the team & join us →
-              </Link>
+              We are always looking for passionate Ph.D. students, postdocs, and visiting scholars.
             </p>
           </div>
         </section>

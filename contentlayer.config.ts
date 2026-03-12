@@ -143,6 +143,7 @@ export const Publication = defineDocumentType(() => ({
     url: { type: 'string' },
     pdf: { type: 'string' },
     code: { type: 'string' },
+    image: { type: 'string' },
   },
   computedFields: {
     slug: {

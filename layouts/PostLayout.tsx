@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
+import { allBlogs } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
@@ -151,13 +152,23 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 )}
               </div>
               <div className="pt-4 xl:pt-8">
-                <Link
-                  href={`/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                  aria-label="Back to the blog"
-                >
-                  &larr; Back to the blog
-                </Link>
+                {allBlogs.filter((b) => !b.draft).length >= 3 ? (
+                  <Link
+                    href={`/${basePath}`}
+                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    aria-label="Back to the blog"
+                  >
+                    &larr; Back to the blog
+                  </Link>
+                ) : (
+                  <Link
+                    href="/"
+                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    aria-label="Back to Home"
+                  >
+                    &larr; Back to Home
+                  </Link>
+                )}
               </div>
             </footer>
           </div>
