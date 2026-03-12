@@ -60,7 +60,9 @@ export default function PublicationsPage() {
                           ? pub.pdf
                           : tag === 'Code' && pub.code
                             ? pub.code
-                            : undefined
+                            : tag === 'Link' && pub.url
+                              ? pub.url
+                              : undefined
                       return <PublicationTag key={tag} text={tag} href={href} />
                     })}
                   </div>

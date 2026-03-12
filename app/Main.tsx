@@ -6,6 +6,7 @@ import FadeInSection from '@/components/FadeInSection'
 import PublicationTag from '@/components/PublicationTag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
+import dentalAiImg from '../public/static/images/dental-ai.png'
 
 const MAX_BLOG_DISPLAY = 5
 
@@ -22,7 +23,7 @@ const RESEARCH_ITEMS = [
     emoji: '🦷',
     title: 'Dental AI',
     desc: 'Building specialized vision-language models and autonomous agents for panoramic X-ray and CBCT analysis. Empowering next-generation dental diagnosis and treatment planning.',
-    image: '/static/images/dental-ai.png',
+    image: dentalAiImg.src,
   },
   {
     id: 'ccta',
@@ -150,7 +151,9 @@ export default function Home({
                           ? pub.pdf
                           : tag === 'Code' && pub.code
                             ? pub.code
-                            : undefined
+                            : tag === 'Link' && pub.url
+                              ? pub.url
+                              : undefined
                       return <PublicationTag key={tag} text={tag} href={href} />
                     })}
                   </div>
