@@ -43,10 +43,22 @@ jobs:
           INIT_CWD: ${{ github.workspace }}
           EXPORT: 1
           UNOPTIMIZED: 1
-          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          BASE_PATH: /aim-pathology
+      - name: Wrap output into /aim-pathology/ subpath
+        run: |
+          mkdir -p _site/aim-pathology
+          cp -r out/* _site/aim-pathology/
+          echo 'mmai-lab.com' > _site/CNAME
+          cat > _site/index.html << 'REDIRECT'
+          <!DOCTYPE html>
+          <html>
+            <head><meta http-equiv="refresh" content="0;url=https://www.monash.edu/it/aimh-lab/people"></head>
+            <body></body>
+          </html>
+          REDIRECT
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./_site
 
   # Deployment job
   deploy:
