@@ -323,19 +323,46 @@ export default function Home({
           </h2>
           <div className="text-muted space-y-5 text-base leading-7">
             <p>
-              <strong className="text-foreground">AIM for Pathology Team</strong> is a research
-              group led by Dr. Zongyuan Ge, working at the intersection of computer vision,
-              generative AI, and clinical medicine.
+              <strong className="text-foreground">AIM for Pathology</strong> is a research team
+              within the{' '}
+              <a
+                href="https://www.monash.edu/it/aimh-lab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                AIM for Health Lab
+              </a>{' '}
+              (Augmented Intelligence and Multimodal Analytics for Health), founded and directed by{' '}
+              <a
+                href="https://research.monash.edu/en/persons/zongyuan-ge/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                A/Prof. Zongyuan Ge
+              </a>{' '}
+              at Monash University. We leverage cutting-edge AI technologies — including large-scale
+              foundation models, vision-language models, and multi-agent systems — to address
+              critical challenges in computational pathology, dental imaging, cardiac CT analysis,
+              and virtual cell simulation.
             </p>
             <p>
-              We believe the next breakthrough in medical AI doesn&apos;t just come from brute-force
-              computation, but from deep clinical insights and elegant algorithmic design. We are a
-              collective of researchers, engineers, and (occasional) 80s anime enthusiasts,
-              dedicated to building AI that truly understands the language of pathology, dentistry,
-              and beyond.
+              The broader AIM for Health Lab spans cross-cutting expertise in health AI translation,
+              privacy-preserving AI, federated learning, digital twins, and multimodal data
+              analysis, with deep connections to first-tier healthcare providers and industry
+              partners. Our research has been published in top venues including{' '}
+              <em>Nature Medicine</em>, <em>Nature Nanotechnology</em>, <em>Science Advances</em>,{' '}
+              <em>The Lancet Digital Health</em>, and leading AI conferences such as NeurIPS, CVPR,
+              and MICCAI.
             </p>
             <p>
               We are always looking for passionate Ph.D. students, postdocs, and visiting scholars.
+              Feel free to reach out via{' '}
+              <a href="mailto:Zongyuan.Ge@monash.edu" className="text-primary hover:underline">
+                Zongyuan.Ge@monash.edu
+              </a>
+              .
             </p>
           </div>
         </section>
