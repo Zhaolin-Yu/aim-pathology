@@ -9,9 +9,10 @@ const POSTS_PER_PAGE = 5
 
 export const generateStaticParams = async () => {
   const tagCounts = tagData as Record<string, number>
-  return Object.keys(tagCounts).flatMap((tag) => {
-    const postCount = tagCounts[tag]
-    const totalPages = Math.max(1, Math.ceil(postCount / POSTS_PER_PAGE))
+  const keys = Object.keys(tagCounts)
+  if (keys.length === 0) return [{ tag: '_', page: '1' }]
+  return keys.flatMap((tag) => {
+    const totalPages = Math.max(1, Math.ceil(tagCounts[tag] / POSTS_PER_PAGE))
     return Array.from({ length: totalPages }, (_, i) => ({
       tag: encodeURI(tag),
       page: (i + 1).toString(),

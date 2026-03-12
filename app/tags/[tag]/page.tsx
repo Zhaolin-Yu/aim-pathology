@@ -29,6 +29,7 @@ export async function generateMetadata(props: {
 export const generateStaticParams = async () => {
   const tagCounts = tagData as Record<string, number>
   const tagKeys = Object.keys(tagCounts)
+  if (tagKeys.length === 0) return [{ tag: '_' }]
   return tagKeys.map((tag) => ({
     tag: encodeURI(tag),
   }))
