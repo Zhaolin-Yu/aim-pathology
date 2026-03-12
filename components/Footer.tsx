@@ -1,20 +1,21 @@
 import Image from 'next/image'
 import siteMetadata from '@/data/siteMetadata'
 import SocialIcon from '@/components/social-icons'
+import aimLogo from '../public/static/images/aim-logo.png'
 
 export default function Footer() {
   return (
     <footer className="divider-gradient-top py-4">
       <div className="text-muted flex flex-col items-center justify-between gap-3 text-xs sm:flex-row">
         {/* 左：Logo + 社交图标 */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5">
           <a href="https://www.monash.edu/it/aimh-lab" target="_blank" rel="noopener noreferrer">
             <Image
-              src="/static/images/aim-logo.png"
+              src={aimLogo}
               alt="AIM Lab"
-              width={28}
-              height={28}
-              className="shrink-0"
+              width={80}
+              height={44}
+              className="shrink-0 dark:invert"
               unoptimized
             />
           </a>

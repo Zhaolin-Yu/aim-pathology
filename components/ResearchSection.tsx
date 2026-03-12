@@ -16,7 +16,7 @@ export default function ResearchSection({ items }: { items: ResearchItem[] }) {
       <h2 className="text-foreground mb-10 text-2xl font-bold tracking-tight md:text-3xl">
         Research
       </h2>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 xl:grid-cols-4 xl:gap-6">
         {items.map((item) => (
           <div key={item.id} className="group">
             {/* 16:9 图片 + hover 微缩放 */}
@@ -26,7 +26,7 @@ export default function ResearchSection({ items }: { items: ResearchItem[] }) {
                 alt=""
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                 unoptimized
               />
             </div>

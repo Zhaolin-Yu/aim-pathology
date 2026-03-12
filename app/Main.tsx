@@ -219,7 +219,7 @@ export default function Home({
           <h2 className="text-foreground mb-8 text-2xl font-bold tracking-tight md:text-3xl">
             About
           </h2>
-          <div className="text-muted max-w-3xl space-y-5 text-base leading-7">
+          <div className="text-muted space-y-5 text-base leading-7">
             <p>
               <strong className="text-foreground">AIM for Pathology Team</strong> is a research
               group led by Dr. Zongyuan Ge, working at the intersection of computer vision,
