@@ -12,6 +12,28 @@ type Member = {
   category: TeamCategoryId
 }
 
+/** 按职级区分头像大小和文字样式 */
+const RANK_STYLE: Record<
+  TeamCategoryId,
+  { size: number; initial: string; name: string; role: string }
+> = {
+  'group-leader': { size: 100, initial: 'text-4xl', name: 'text-base font-bold', role: 'text-sm' },
+  'team-leader': {
+    size: 96,
+    initial: 'text-3xl',
+    name: 'text-base font-semibold',
+    role: 'text-sm',
+  },
+  'research-fellow': {
+    size: 88,
+    initial: 'text-2xl',
+    name: 'text-sm font-semibold',
+    role: 'text-xs',
+  },
+  phd: { size: 80, initial: 'text-2xl', name: 'text-sm font-semibold', role: 'text-xs' },
+  master: { size: 80, initial: 'text-2xl', name: 'text-sm font-semibold', role: 'text-xs' },
+}
+
 export default function TeamPageClient({
   categories,
   members,
@@ -25,7 +47,6 @@ export default function TeamPageClient({
 
   return (
     <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
-      {/* 左侧侧边栏：仅显示有成员的分组，点击滚动到对应区块 */}
       <aside className="shrink-0 lg:w-56">
         <nav className="sticky top-24 space-y-1 border-b border-gray-200 pb-6 lg:border-b-0 lg:pb-0 dark:border-gray-700">
           {categoriesWithMembers.map((cat) => {
@@ -44,25 +65,21 @@ export default function TeamPageClient({
         </nav>
       </aside>
 
-      {/* 右侧：仅渲染有成员的分组 */}
       <main className="min-w-0 flex-1 space-y-12">
         {categoriesWithMembers.map((cat) => {
           const filtered = members.filter((m) => m.category === cat.id)
+          const style = RANK_STYLE[cat.id]
           return (
             <section key={cat.id} id={cat.id} className="scroll-mt-28">
               <h2 className="text-foreground mb-6 text-xl font-semibold">
                 {cat.label} ({filtered.length})
               </h2>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="grid gap-x-8 gap-y-5 sm:grid-cols-2 xl:grid-cols-3">
                 {filtered.map((member) => (
-                  <div
-                    key={member.name}
-                    className="rounded-xl border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/50"
-                  >
-                    {/* 照片区 1:1 */}
+                  <div key={member.name} className="flex items-center gap-4">
                     <div
-                      className="relative w-full overflow-hidden rounded-t-xl bg-gray-200 dark:bg-gray-700"
-                      style={{ aspectRatio: '1/1' }}
+                      className="relative shrink-0 overflow-hidden rounded-sm bg-gray-200 dark:bg-gray-700"
+                      style={{ width: style.size, height: style.size }}
                     >
                       {member.image ? (
                         <Image
@@ -70,16 +87,18 @@ export default function TeamPageClient({
                           alt={member.name}
                           fill
                           className="object-cover"
-                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                          sizes={`${style.size}px`}
                         />
                       ) : (
-                        <div className="bg-primary/20 text-primary flex h-full w-full items-center justify-center text-4xl font-bold">
+                        <div
+                          className={`bg-primary/15 text-primary flex h-full w-full items-center justify-center font-bold ${style.initial}`}
+                        >
                           {member.name.charAt(0)}
                         </div>
                       )}
                     </div>
-                    <div className="p-4 text-center">
-                      <h3 className="text-foreground font-semibold">
+                    <div className="min-w-0">
+                      <h3 className={`text-foreground leading-snug ${style.name}`}>
                         {member.link ? (
                           <a
                             href={member.link}
@@ -93,7 +112,7 @@ export default function TeamPageClient({
                           member.name
                         )}
                       </h3>
-                      <p className="text-muted mt-1 text-sm">{member.role}</p>
+                      <p className={`text-muted mt-0.5 ${style.role}`}>{member.role}</p>
                     </div>
                   </div>
                 ))}

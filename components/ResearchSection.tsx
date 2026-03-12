@@ -20,7 +20,7 @@ export default function ResearchSection({ items }: { items: ResearchItem[] }) {
         {items.map((item) => (
           <div key={item.id} className="group">
             {/* 16:9 图片 + hover 微缩放 */}
-            <div className="research-img-wrap relative aspect-video w-full overflow-hidden rounded-lg">
+            <div className="research-img-wrap relative aspect-video w-full overflow-hidden rounded-sm border border-gray-200 dark:border-gray-700">
               <Image
                 src={item.image}
                 alt=""
