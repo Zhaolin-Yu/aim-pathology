@@ -9,10 +9,28 @@ import siteMetadata from '@/data/siteMetadata'
 import { TEAM_MEMBERS, TEAM_CATEGORIES } from '@/data/teamData'
 import { formatDate } from 'pliny/utils/formatDate'
 import dentalAiImg from '../public/static/images/dental-ai.png'
+import teamZongyuanGe from '../public/static/images/team/zongyuan-ge.jpg'
+import teamLitaoYang from '../public/static/images/team/litao-yang.jpg'
+import teamChangYuwen from '../public/static/images/team/chang-yuwen.jpg'
+import teamJasonLiu from '../public/static/images/team/jason-liu.jpg'
+import teamWengHongHui from '../public/static/images/team/weng-hong-hui.jpg'
+import teamYunshuChen from '../public/static/images/team/yunshu-chen.jpg'
+import teamZhaolinYu from '../public/static/images/team/zhaolin-yu.jpg'
+import teamZhenhuaChen from '../public/static/images/team/zhenhua-chen.jpg'
+import teamPhoto from '../public/static/images/team/team-photo.jpg'
 
 /** 本地图片路径 → import 后的资源路径，解决部署时 basePath 前缀问题 */
 const LOCAL_IMAGE_MAP: Record<string, string> = {
   '/static/images/dental-ai.png': dentalAiImg.src,
+  '/static/images/team/zongyuan-ge.jpg': teamZongyuanGe.src,
+  '/static/images/team/litao-yang.jpg': teamLitaoYang.src,
+  '/static/images/team/chang-yuwen.jpg': teamChangYuwen.src,
+  '/static/images/team/jason-liu.jpg': teamJasonLiu.src,
+  '/static/images/team/weng-hong-hui.jpg': teamWengHongHui.src,
+  '/static/images/team/yunshu-chen.jpg': teamYunshuChen.src,
+  '/static/images/team/zhaolin-yu.jpg': teamZhaolinYu.src,
+  '/static/images/team/zhenhua-chen.jpg': teamZhenhuaChen.src,
+  '/static/images/team/team-photo.jpg': teamPhoto.src,
 }
 function resolveImage(src: string): string {
   return LOCAL_IMAGE_MAP[src] || src
@@ -270,7 +288,7 @@ export default function Home({
                 <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-sm bg-gray-200 dark:bg-gray-700">
                   {member.image ? (
                     <Image
-                      src={member.image}
+                      src={resolveImage(member.image)}
                       alt={member.name}
                       fill
                       className="object-cover"
@@ -329,7 +347,7 @@ export default function Home({
           <div className="overflow-hidden rounded-sm border border-gray-200 dark:border-gray-700">
             <div className="relative aspect-[21/9] w-full bg-gray-100 dark:bg-gray-800">
               <Image
-                src="/static/images/team/team-photo.jpg"
+                src={resolveImage('/static/images/team/team-photo.jpg')}
                 alt="Team photo"
                 fill
                 className="object-cover"
