@@ -31,9 +31,9 @@ const RESEARCH_ITEMS = [
   {
     id: 'dental',
     emoji: '🦷',
-    title: 'Dental AI',
+    title: 'Dental',
     desc: 'Building specialized vision-language models and autonomous agents for panoramic X-ray and CBCT analysis. Empowering next-generation dental diagnosis and treatment planning.',
-    image: 'https://placehold.co/800x400/18181b/6ee7b7?text=Dental+AI',
+    image: 'https://placehold.co/800x400/18181b/6ee7b7?text=Dental',
   },
   {
     id: 'ccta',
