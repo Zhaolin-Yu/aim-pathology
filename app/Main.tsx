@@ -18,10 +18,14 @@ import teamYunshuChen from '../public/static/images/team/yunshu-chen.jpg'
 import teamZhaolinYu from '../public/static/images/team/zhaolin-yu.jpg'
 import teamZhenhuaChen from '../public/static/images/team/zhenhua-chen.jpg'
 import teamPhoto from '../public/static/images/team/team-photo.jpg'
+import kneeAgentImg from '../public/static/images/knee agent.png'
+import teamLinchaoHe from '../public/static/images/team/linchao-he.jpg'
 
 /** 本地图片路径 → import 后的资源路径，解决部署时 basePath 前缀问题 */
 const LOCAL_IMAGE_MAP: Record<string, string> = {
   '/static/images/dental-ai.png': dentalAiImg.src,
+  '/static/images/knee agent.png': kneeAgentImg.src,
+  '/static/images/team/linchao-he.jpg': teamLinchaoHe.src,
   '/static/images/team/zongyuan-ge.jpg': teamZongyuanGe.src,
   '/static/images/team/litao-yang.jpg': teamLitaoYang.src,
   '/static/images/team/chang-yuwen.jpg': teamChangYuwen.src,
@@ -37,6 +41,21 @@ function resolveImage(src: string): string {
 }
 
 const MAX_BLOG_DISPLAY = 5
+
+/** 仅在首页展示、没有详情页的额外 project */
+const EXTRA_PROJECTS = [
+  {
+    slug: '_knee-agent',
+    title: 'An Agent for Knee Injury Recovery Prediction',
+    date: '2026-01-01',
+    dateLabel: '2026',
+    venue: 'Wait Release',
+    authors: ['Linchao He'],
+    tags: [] as string[],
+    image: '/static/images/knee agent.png',
+    noLink: true,
+  },
+]
 
 const RESEARCH_ITEMS = [
   {
@@ -149,66 +168,88 @@ export default function Home({
             )}
           </div>
 
-          {publications.length === 0 && (
-            <p className="text-muted">No projects yet. Add MDX files under data/publication/.</p>
-          )}
+          {(() => {
+            type ProjectItem = {
+              slug: string
+              title: string
+              date: string
+              dateLabel?: string
+              venue: string
+              authors: string[]
+              tags: string[]
+              url?: string
+              pdf?: string
+              code?: string
+              image?: string
+              noLink?: boolean
+            }
+            const allProjects: ProjectItem[] = [
+              ...publications.map((p) => ({ ...p, noLink: false })),
+              ...EXTRA_PROJECTS,
+            ]
 
-          <div className="space-y-0">
-            {publications.map((pub) => (
-              <article key={pub.slug} className="pub-row flex items-center gap-6 py-5 pl-4">
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
-                    <time
-                      dateTime={pub.date}
-                      className="text-muted shrink-0 font-mono text-xs tabular-nums"
-                    >
-                      {formatDate(pub.date, siteMetadata.locale)}
-                    </time>
-                    <span className="text-muted hidden font-mono text-xs sm:inline">·</span>
-                    <span className="text-muted font-mono text-xs tracking-wider uppercase">
-                      {pub.venue}
-                    </span>
-                  </div>
-                  <h3 className="text-foreground mt-1.5 text-base leading-snug font-semibold">
-                    <Link
-                      href={`/publications/${pub.slug}`}
-                      className="text-primary hover:underline"
-                    >
-                      {pub.title}
-                    </Link>
-                  </h3>
-                  <p className="text-muted mt-1 text-sm">{pub.authors?.join(', ') || '—'}</p>
-                  {pub.tags && pub.tags.length > 0 && (
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {pub.tags.map((tag) => {
-                        const href =
-                          tag === 'PDF' && pub.pdf
-                            ? pub.pdf
-                            : tag === 'Code' && pub.code
-                              ? pub.code
-                              : tag === 'Link' && pub.url
-                                ? pub.url
-                                : undefined
-                        return <PublicationTag key={tag} text={tag} href={href} />
-                      })}
+            if (allProjects.length === 0) return <p className="text-muted">No projects yet.</p>
+
+            return (
+              <div className="space-y-0">
+                {allProjects.map((pub) => (
+                  <article key={pub.slug} className="pub-row flex items-center gap-6 py-5 pl-4">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                        <span className="text-muted shrink-0 font-mono text-xs tabular-nums">
+                          {pub.dateLabel || formatDate(pub.date, siteMetadata.locale)}
+                        </span>
+                        <span className="text-muted hidden font-mono text-xs sm:inline">·</span>
+                        <span className="text-muted font-mono text-xs tracking-wider uppercase">
+                          {pub.venue}
+                        </span>
+                      </div>
+                      <h3 className="text-foreground mt-1.5 text-base leading-snug font-semibold">
+                        {pub.noLink ? (
+                          pub.title
+                        ) : (
+                          <Link
+                            href={`/publications/${pub.slug}`}
+                            className="text-primary hover:underline"
+                          >
+                            {pub.title}
+                          </Link>
+                        )}
+                      </h3>
+                      <p className="text-muted mt-1 text-sm">{pub.authors?.join(', ') || '—'}</p>
+                      {pub.tags && pub.tags.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {pub.tags.map((tag) => {
+                            const href =
+                              tag === 'PDF' && pub.pdf
+                                ? pub.pdf
+                                : tag === 'Code' && pub.code
+                                  ? pub.code
+                                  : tag === 'Link' && pub.url
+                                    ? pub.url
+                                    : undefined
+                            return <PublicationTag key={tag} text={tag} href={href} />
+                          })}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                {pub.image && (
-                  <div className="relative hidden aspect-video w-40 shrink-0 overflow-hidden rounded-sm border border-gray-200 sm:block dark:border-gray-700">
-                    <Image
-                      src={resolveImage(pub.image)}
-                      alt={pub.title}
-                      fill
-                      className="object-cover"
-                      sizes="160px"
-                      unoptimized
-                    />
-                  </div>
-                )}
-              </article>
-            ))}
-          </div>
+                    {pub.image && (
+                      <div className="relative hidden aspect-video w-40 shrink-0 overflow-hidden rounded-sm border border-gray-200 sm:block dark:border-gray-700">
+                        <Image
+                          src={resolveImage(pub.image)}
+                          alt={pub.title}
+                          fill
+                          className="object-cover"
+                          sizes="160px"
+                          unoptimized
+                        />
+                      </div>
+                    )}
+                  </article>
+                ))}
+              </div>
+            )
+          })()}
         </section>
         <div className="divider-gradient" />
       </FadeInSection>
