@@ -66,7 +66,7 @@
     --foreground: #3f3f46;
     --primary: #8b5cf6; /* 柔和的紫 */
     --secondary: #34d399; /* 柔和的绿 */
-    --muted: #a1a1aa;
+    --muted: #71717a;
   }
 
   .dark {
@@ -75,7 +75,7 @@
     --foreground: #d4d4d8;
     --primary: #c4b5fd; /* 暗模式下更浅、更灰的紫 */
     --secondary: #6ee7b7; /* 暗模式下的弱化绿 */
-    --muted: #71717a;
+    --muted: #a1a1aa;
   }
 
   *,

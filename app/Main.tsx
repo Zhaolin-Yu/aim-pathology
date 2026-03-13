@@ -6,7 +6,7 @@ import ResearchSection from '@/components/ResearchSection'
 import FadeInSection from '@/components/FadeInSection'
 import PublicationTag from '@/components/PublicationTag'
 import siteMetadata from '@/data/siteMetadata'
-import { TEAM_MEMBERS } from '@/data/teamData'
+import { TEAM_MEMBERS, TEAM_CATEGORIES } from '@/data/teamData'
 import { formatDate } from 'pliny/utils/formatDate'
 import dentalAiImg from '../public/static/images/dental-ai.png'
 
@@ -263,6 +263,8 @@ export default function Home({
             const others = TEAM_MEMBERS.filter(
               (m) => !(['group-leader', 'team-leader'] as string[]).includes(m.category)
             )
+            const categoryLabel = (id: string) =>
+              TEAM_CATEGORIES.find((c) => c.id === id)?.label ?? ''
             const renderCard = (member: (typeof TEAM_MEMBERS)[number]) => (
               <div key={member.name} className="flex w-64 items-center gap-3">
                 <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-sm bg-gray-200 dark:bg-gray-700">
@@ -273,6 +275,7 @@ export default function Home({
                       fill
                       className="object-cover"
                       sizes="100px"
+                      unoptimized
                     />
                   ) : (
                     <div className="bg-primary/15 text-primary flex h-full w-full items-center justify-center text-3xl font-bold">
@@ -281,7 +284,7 @@ export default function Home({
                   )}
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-foreground text-sm leading-snug font-semibold">
+                  <h3 className="text-foreground flex items-center gap-2 text-sm leading-snug font-semibold">
                     {member.link ? (
                       <a
                         href={member.link}
@@ -294,6 +297,11 @@ export default function Home({
                     ) : (
                       member.name
                     )}
+                    {categoryLabel(member.category) && (
+                      <span className="text-muted text-[10px] font-normal">
+                        {categoryLabel(member.category)}
+                      </span>
+                    )}
                   </h3>
                   <p className="text-muted mt-0.5 text-xs">{member.role}</p>
                 </div>
@@ -301,16 +309,35 @@ export default function Home({
             )
             return (
               <div className="space-y-8">
-                <div className="flex flex-wrap gap-x-10 gap-y-6">{leaders.map(renderCard)}</div>
+                <div className="flex flex-wrap justify-center gap-x-10 gap-y-6">
+                  {leaders.map(renderCard)}
+                </div>
                 {others.length > 0 && (
                   <>
                     <div className="divider-gradient" />
-                    <div className="flex flex-wrap gap-x-10 gap-y-6">{others.map(renderCard)}</div>
+                    <div className="flex flex-wrap justify-center gap-x-10 gap-y-6">
+                      {others.map(renderCard)}
+                    </div>
                   </>
                 )}
               </div>
             )
           })()}
+
+          {/* 合照 */}
+          <div className="divider-gradient mt-10 mb-10" />
+          <div className="overflow-hidden rounded-sm border border-gray-200 dark:border-gray-700">
+            <div className="relative aspect-[21/9] w-full bg-gray-100 dark:bg-gray-800">
+              <Image
+                src="/static/images/team/team-photo.jpg"
+                alt="Team photo"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                unoptimized
+              />
+            </div>
+          </div>
         </section>
         <div className="divider-gradient" />
       </FadeInSection>

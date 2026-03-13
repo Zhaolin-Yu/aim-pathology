@@ -43,9 +43,7 @@ jobs:
           INIT_CWD: ${{ github.workspace }}
           EXPORT: 1
           UNOPTIMIZED: 1
-          BASE_PATH: ''
-      - name: Add CNAME for pathology.mmai-lab.com
-        run: echo 'pathology.mmai-lab.com' > out/CNAME
+          BASE_PATH: /aim-pathology
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

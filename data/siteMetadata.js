@@ -7,7 +7,7 @@ const siteMetadata = {
     'We build intelligent foundation models and multimodal agents to bridge the gap between microscopic pathology and macroscopic medical imaging.',
   language: 'en-us',
   theme: 'dark',
-  siteUrl: 'https://aim-pathology.example.com',
+  siteUrl: 'https://zhaolin-yu.github.io/aim-pathology',
   siteRepo: 'https://github.com/AIM-Pathology',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
