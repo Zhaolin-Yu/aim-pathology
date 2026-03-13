@@ -362,7 +362,10 @@ export default function Home({
 
       {/* About */}
       <FadeInSection className="w-full">
-        <section id="about" className="scroll-mt-20 py-16 md:py-24">
+        <section
+          id="about"
+          className="flex min-h-screen scroll-mt-20 flex-col justify-center py-16 md:py-24"
+        >
           <h2 className="text-foreground mb-8 text-2xl font-bold tracking-tight md:text-3xl">
             About
           </h2>

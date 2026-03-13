@@ -211,11 +211,11 @@ input:-webkit-autofill:focus {
 
 /* 全局背景渐变：固定在视口，滚动时不动 */
 body {
+  background-attachment: fixed;
+  background-size: 100vw 100vh;
   background-image:
     radial-gradient(ellipse 80% 50% at 20% 20%, oklch(0.95 0.015 293 / 0.5) 0%, transparent 70%),
     radial-gradient(ellipse 60% 40% at 80% 80%, oklch(0.96 0.01 180 / 0.35) 0%, transparent 65%);
-  background-attachment: fixed;
-  background-size: 100vw 100vh;
 }
 :where(.dark) body {
   background-image:
