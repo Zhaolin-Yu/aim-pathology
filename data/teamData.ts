@@ -61,6 +61,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: 'Zhipen Luo',
     role: '',
+    image: '/static/images/team/zhipen-luo.jpg',
     category: 'phd',
   },
   {

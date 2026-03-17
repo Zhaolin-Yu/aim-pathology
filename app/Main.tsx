@@ -21,6 +21,7 @@ import teamPhoto from '../public/static/images/team/team-photo.jpg'
 import kneeAgentImg from '../public/static/images/knee agent.png'
 import ivusImg from '../public/static/images/ivus.png'
 import teamLinchaoHe from '../public/static/images/team/linchao-he.jpg'
+import teamZhipenLuo from '../public/static/images/team/zhipen-luo.jpg'
 
 /** 本地图片路径 → import 后的资源路径，解决部署时 basePath 前缀问题 */
 const LOCAL_IMAGE_MAP: Record<string, string> = {
@@ -36,6 +37,7 @@ const LOCAL_IMAGE_MAP: Record<string, string> = {
   '/static/images/team/yunshu-chen.jpg': teamYunshuChen.src,
   '/static/images/team/zhaolin-yu.jpg': teamZhaolinYu.src,
   '/static/images/team/zhenhua-chen.jpg': teamZhenhuaChen.src,
+  '/static/images/team/zhipen-luo.jpg': teamZhipenLuo.src,
   '/static/images/team/team-photo.jpg': teamPhoto.src,
 }
 function resolveImage(src: string): string {
