@@ -59,6 +59,11 @@ export const TEAM_MEMBERS: TeamMember[] = [
     category: 'phd',
   },
   {
+    name: 'Zhipen Luo',
+    role: '',
+    category: 'phd',
+  },
+  {
     name: 'Weng Hong Hui',
     role: 'whui0008@student.monash.edu',
     image: '/static/images/team/weng-hong-hui.jpg',
@@ -75,10 +80,5 @@ export const TEAM_MEMBERS: TeamMember[] = [
     role: 'jason.liu1@monash.edu',
     image: '/static/images/team/jason-liu.jpg',
     category: 'bachelor',
-  },
-  {
-    name: 'Zhipen Luo',
-    role: '',
-    category: 'phd',
   },
 ]
