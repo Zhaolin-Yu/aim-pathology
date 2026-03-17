@@ -25,7 +25,8 @@ export async function generateMetadata(props: {
 }
 
 export function generateStaticParams() {
-  return allPublications.filter((p) => !p.draft).map((p) => ({ slug: p.slug }))
+  const params = allPublications.filter((p) => !p.draft).map((p) => ({ slug: p.slug }))
+  return params.length > 0 ? params : [{ slug: '_placeholder' }]
 }
 
 export default async function PublicationPage(props: { params: Promise<{ slug: string }> }) {

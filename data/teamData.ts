@@ -79,6 +79,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: 'Zhipen Luo',
     role: '',
-    category: 'other',
+    category: 'phd',
   },
 ]
