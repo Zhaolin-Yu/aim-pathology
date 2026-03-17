@@ -19,12 +19,14 @@ import teamZhaolinYu from '../public/static/images/team/zhaolin-yu.jpg'
 import teamZhenhuaChen from '../public/static/images/team/zhenhua-chen.jpg'
 import teamPhoto from '../public/static/images/team/team-photo.jpg'
 import kneeAgentImg from '../public/static/images/knee agent.png'
+import ivusImg from '../public/static/images/ivus.png'
 import teamLinchaoHe from '../public/static/images/team/linchao-he.jpg'
 
 /** 本地图片路径 → import 后的资源路径，解决部署时 basePath 前缀问题 */
 const LOCAL_IMAGE_MAP: Record<string, string> = {
   '/static/images/dental-ai.png': dentalAiImg.src,
   '/static/images/knee agent.png': kneeAgentImg.src,
+  '/static/images/ivus.png': ivusImg.src,
   '/static/images/team/linchao-he.jpg': teamLinchaoHe.src,
   '/static/images/team/zongyuan-ge.jpg': teamZongyuanGe.src,
   '/static/images/team/litao-yang.jpg': teamLitaoYang.src,
@@ -44,6 +46,31 @@ const MAX_BLOG_DISPLAY = 5
 
 /** 仅在首页展示、没有详情页的额外 project */
 const EXTRA_PROJECTS = [
+  {
+    slug: '_dental-agent',
+    title: 'An Agent for Auditable Dental Panoramic X-ray Interpretation',
+    date: '2026-02-01',
+    dateLabel: '2026.02',
+    venue: 'arXiv preprint',
+    authors: ['Zhaolin Yu'],
+    tags: ['PDF', 'Code', 'Link'] as string[],
+    pdf: 'https://arxiv.org/pdf/2603.00462',
+    code: 'https://github.com/Zhaolin-Yu/OPGAgent',
+    url: 'https://arxiv.org/abs/2603.00462',
+    image: '/static/images/dental-ai.png',
+    noLink: true,
+  },
+  {
+    slug: '_ivus',
+    title: 'Coronary Plaque Assessment with IVUS',
+    date: '2026-01-01',
+    dateLabel: '2026.01',
+    venue: 'Wait Release',
+    authors: ['Yunshu Chen'],
+    tags: [] as string[],
+    image: '/static/images/ivus.png',
+    noLink: true,
+  },
   {
     slug: '_knee-agent',
     title: 'An Agent for Knee Injury Recovery Prediction',
@@ -145,25 +172,15 @@ export default function Home({
       {/* Research */}
       <FadeInSection className="w-full">
         <section id="research" className="scroll-mt-20 py-16 md:py-24">
-          <ResearchSection
-            items={RESEARCH_ITEMS.map((i) => ({ ...i, image: resolveImage(i.image) }))}
-          />
-        </section>
-        <div className="divider-gradient" />
-      </FadeInSection>
-
-      {/* Projects */}
-      <FadeInSection className="w-full">
-        <section id="projects" className="scroll-mt-20 py-16 md:py-24">
           <div className="text-foreground mb-8 flex items-baseline justify-between">
-            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Projects</h2>
+            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Research</h2>
             {publications.length >= 3 && (
               <Link
                 href="/publications"
                 className="text-primary text-sm font-medium hover:underline"
-                aria-label="All projects"
+                aria-label="All research"
               >
-                All Projects →
+                All Research →
               </Link>
             )}
           </div>
@@ -188,7 +205,7 @@ export default function Home({
               ...EXTRA_PROJECTS,
             ]
 
-            if (allProjects.length === 0) return <p className="text-muted">No projects yet.</p>
+            if (allProjects.length === 0) return <p className="text-muted">No research yet.</p>
 
             return (
               <div className="space-y-0">

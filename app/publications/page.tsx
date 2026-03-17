@@ -4,7 +4,7 @@ import SectionContainer from '@/components/SectionContainer'
 import Link from '@/components/Link'
 import PublicationTag from '@/components/PublicationTag'
 
-export const metadata = genPageMetadata({ title: 'Projects' })
+export const metadata = genPageMetadata({ title: 'Research' })
 
 export default function PublicationsPage() {
   const list = (allPublications || [])
@@ -23,14 +23,14 @@ export default function PublicationsPage() {
     <SectionContainer>
       <div className="pt-6 pb-10">
         <h1 className="text-foreground text-3xl font-extrabold tracking-tight md:text-4xl">
-          Projects
+          Research
         </h1>
         <p className="text-muted mt-2 text-lg leading-7">
-          Selected projects from AIM for Pathology Team.
+          Selected research from AIM for Pathology Team.
         </p>
       </div>
 
-      {list.length === 0 && <p className="text-muted py-8">No projects yet.</p>}
+      {list.length === 0 && <p className="text-muted py-8">No research yet.</p>}
 
       {years.map((year) => (
         <section key={year} className="mb-10 last:mb-0">

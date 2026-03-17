@@ -29,7 +29,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: 'Litao Yang',
-    role: 'litao.yang@monash.edu',
+    role: 'Research Fellow',
     link: 'https://research.monash.edu/en/persons/litao-yang/',
     image: '/static/images/team/litao-yang.jpg',
     category: 'team-leader',
@@ -41,15 +41,21 @@ export const TEAM_MEMBERS: TeamMember[] = [
     category: 'phd',
   },
   {
-    name: 'Jason Liu',
-    role: 'jason.liu1@monash.edu',
-    image: '/static/images/team/jason-liu.jpg',
-    category: 'bachelor',
-  },
-  {
     name: 'Linchao He',
     role: '',
     image: '/static/images/team/linchao-he.jpg',
+    category: 'phd',
+  },
+  {
+    name: 'Yunshu Chen',
+    role: 'yunshu.chen@monash.edu',
+    image: '/static/images/team/yunshu-chen.jpg',
+    category: 'phd',
+  },
+  {
+    name: 'Zhenhua Chen',
+    role: 'zhenhua.chen@monash.edu',
+    image: '/static/images/team/zhenhua-chen.jpg',
     category: 'phd',
   },
   {
@@ -59,22 +65,16 @@ export const TEAM_MEMBERS: TeamMember[] = [
     category: 'master',
   },
   {
-    name: 'Yunshu Chen',
-    role: 'yunshu.chen@monash.edu',
-    image: '/static/images/team/yunshu-chen.jpg',
-    category: 'phd',
-  },
-  {
     name: 'Zhaolin Yu',
     role: 'zyuu0081@student.monash.edu',
     image: '/static/images/team/zhaolin-yu.jpg',
     category: 'master',
   },
   {
-    name: 'Zhenhua Chen',
-    role: 'zhenhua.chen@monash.edu',
-    image: '/static/images/team/zhenhua-chen.jpg',
-    category: 'phd',
+    name: 'Jason Liu',
+    role: 'jason.liu1@monash.edu',
+    image: '/static/images/team/jason-liu.jpg',
+    category: 'bachelor',
   },
   {
     name: 'Zhipen Luo',

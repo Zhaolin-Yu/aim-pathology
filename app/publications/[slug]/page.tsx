@@ -88,7 +88,7 @@ export default async function PublicationPage(props: { params: Promise<{ slug: s
         <footer className="pt-6 pb-4">
           {allPublications.filter((p) => !p.draft).length >= 3 ? (
             <Link href="/publications" className="text-primary text-sm font-medium hover:underline">
-              ← Back to Projects
+              ← Back to Research
             </Link>
           ) : (
             <Link href="/" className="text-primary text-sm font-medium hover:underline">

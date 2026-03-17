@@ -14,7 +14,7 @@ export default function ResearchSection({ items }: { items: ResearchItem[] }) {
   return (
     <>
       <h2 className="text-foreground mb-10 text-2xl font-bold tracking-tight md:text-3xl">
-        Research
+        Projects
       </h2>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 xl:grid-cols-4 xl:gap-6">
         {items.map((item) => (
