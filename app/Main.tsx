@@ -175,9 +175,9 @@ export default function Home({
               <BaffleSubtitle />
             </p>
             <p className="text-muted mt-6 text-center text-base leading-7 md:text-lg">
-              We build intelligent foundation models and multimodal agents to bridge the gap between
-              microscopic pathology and macroscopic medical imaging. From virtual cells to fully
-              autonomous diagnostic systems.
+              We build intelligent systems that bridge AI and clinical medicine — leveraging
+              foundation models, autonomous agents, and physics-informed learning to advance medical
+              image understanding across diverse imaging modalities.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Link
@@ -458,7 +458,7 @@ export default function Home({
           </h2>
           <div className="text-muted space-y-5 text-base leading-7">
             <p>
-              <strong className="text-foreground">AIM for Pathology</strong> is a research team
+              <strong className="text-foreground">AIM for Pathology</strong> is a research group
               within the{' '}
               <a
                 href="https://www.monash.edu/it/aimh-lab"
@@ -468,7 +468,23 @@ export default function Home({
               >
                 AIM for Health Lab
               </a>{' '}
-              (Augmented Intelligence and Multimodal Analytics for Health), founded and directed by{' '}
+              at Monash University. Our group focuses on developing AI systems for medical image
+              analysis, including foundation models, vision-language models, and autonomous agents.
+              We work across a wide range of imaging modalities and clinical scenarios, aiming to
+              build comprehensive and reliable tools for clinical diagnosis and treatment planning.
+            </p>
+            <p>
+              The{' '}
+              <a
+                href="https://www.monash.edu/it/aimh-lab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                AIM for Health Lab
+              </a>{' '}
+              (Augmented Intelligence and Multimodal Analytics for Health) is founded and directed
+              by{' '}
               <a
                 href="https://research.monash.edu/en/persons/zongyuan-ge/"
                 target="_blank"
@@ -476,18 +492,12 @@ export default function Home({
                 className="text-primary hover:underline"
               >
                 A/Prof. Zongyuan Ge
-              </a>{' '}
-              at Monash University. We leverage cutting-edge AI technologies — including large-scale
-              foundation models, vision-language models, and multi-agent systems — to address
-              critical challenges in computational pathology, dental imaging, cardiac CT analysis,
-              and virtual cell simulation.
-            </p>
-            <p>
-              The broader AIM for Health Lab spans cross-cutting expertise in health AI translation,
-              privacy-preserving AI, federated learning, digital twins, and multimodal data
-              analysis, with deep connections to first-tier healthcare providers and industry
-              partners. Our research has been published in top venues including{' '}
-              <em>Nature Medicine</em>, <em>Nature Nanotechnology</em>, <em>Science Advances</em>,{' '}
+              </a>
+              . The lab spans cross-cutting expertise in health AI translation, privacy-preserving
+              AI, federated learning, and multimodal data analysis, with deep connections to
+              first-tier healthcare providers and industry partners. Research from the lab has been
+              published in top venues including <em>Nature Medicine</em>,{' '}
+              <em>Nature Nanotechnology</em>, <em>Science Advances</em>,{' '}
               <em>The Lancet Digital Health</em>, and leading AI conferences such as NeurIPS, CVPR,
               and MICCAI.
             </p>
