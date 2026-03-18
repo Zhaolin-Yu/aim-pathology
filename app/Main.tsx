@@ -20,6 +20,8 @@ import teamZhenhuaChen from '../public/static/images/team/zhenhua-chen.jpg'
 import teamPhoto from '../public/static/images/team/team-photo.jpg'
 import kneeAgentImg from '../public/static/images/knee agent.png'
 import ivusImg from '../public/static/images/ivus.png'
+import bvdImg from '../public/static/images/bvd.png'
+import srPinnImg from '../public/static/images/sr-pinn.png'
 import teamLinchaoHe from '../public/static/images/team/linchao-he.jpg'
 import teamZhipenLuo from '../public/static/images/team/zhipen-luo.jpg'
 
@@ -28,6 +30,8 @@ const LOCAL_IMAGE_MAP: Record<string, string> = {
   '/static/images/dental-ai.png': dentalAiImg.src,
   '/static/images/knee agent.png': kneeAgentImg.src,
   '/static/images/ivus.png': ivusImg.src,
+  '/static/images/bvd.png': bvdImg.src,
+  '/static/images/sr-pinn.png': srPinnImg.src,
   '/static/images/team/linchao-he.jpg': teamLinchaoHe.src,
   '/static/images/team/zongyuan-ge.jpg': teamZongyuanGe.src,
   '/static/images/team/litao-yang.jpg': teamLitaoYang.src,
@@ -48,6 +52,17 @@ const MAX_BLOG_DISPLAY = 5
 
 /** 仅在首页展示、没有详情页的额外 project */
 const EXTRA_PROJECTS = [
+  {
+    slug: '_bvd',
+    title: 'BVD: A Two-Stage Network for Identifying Bronchial Variation Types from CT Images',
+    date: '2026-04-01',
+    dateLabel: '2026.04',
+    venue: 'IEEE ISBI 2026',
+    authors: ['Chang Yuwen'],
+    tags: [] as string[],
+    image: '/static/images/bvd.png',
+    noLink: true,
+  },
   {
     slug: '_dental-agent',
     title: 'An Agent for Auditable Dental Panoramic X-ray Interpretation',
@@ -71,6 +86,18 @@ const EXTRA_PROJECTS = [
     authors: ['Yunshu Chen'],
     tags: [] as string[],
     image: '/static/images/ivus.png',
+    noLink: true,
+  },
+  {
+    slug: '_sr-pinn',
+    title:
+      'Breaking the Noise Barrier: Accurate Solution Reconstruction via Physics-Symbolic Constraints',
+    date: '2026-01-01',
+    dateLabel: '2026.01',
+    venue: 'Wait Release',
+    authors: ['Zhenhua Chen'],
+    tags: [] as string[],
+    image: '/static/images/sr-pinn.png',
     noLink: true,
   },
   {
